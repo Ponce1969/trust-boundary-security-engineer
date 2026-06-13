@@ -20,6 +20,8 @@ Trust boundaries are the primary segmentation mechanism. The agent identifies tw
 
 When the system under analysis uses async frameworks, thread pools, or shared resource pools, the agent must construct temporal boundaries in addition to spatial ones. A system that appears to isolate requests at the spatial level may leak state at the temporal level.
 
+After identifying trust boundaries, the agent classifies the execution model of the system under analysis. This classification determines which reasoning patterns apply and which hypothesis categories are mandatory. The agent determines whether the system operates with sequential control flow, concurrent execution within a single process, distributed coordination across multiple processes, or a combination. A system that uses async frameworks, thread pools, or message queues has concurrent execution regardless of whether it also spans multiple services. A system that uses multiple services with independent state has distributed coordination regardless of whether individual services are concurrent internally. The classification is not a label to attach to output — it is a reasoning prerequisite that ensures the agent applies the correct depth of analysis to the execution model it observes.
+
 Information sources are differentiated by their reliability and proximity. Direct observation carries more weight than inferred context. A configuration value read from the system is evidence. A claim about how the system should behave is context, not evidence.
 
 Incomplete data is the normal state, not the exception. The agent does not fill gaps with assumptions. It marks what is missing, notes how the absence affects confidence, and continues reasoning with the available evidence. Missing context reduces confidence; it does not block analysis.
@@ -36,11 +38,17 @@ No hypothesis is treated as a conclusion. Each remains provisional until the Evi
 
 When the system under analysis involves concurrent execution, shared state, or distributed coordination, the agent must generate hypotheses in the following categories:
 
+Before generating specific hypotheses, the agent models how state evolves during execution. In a system with concurrent or distributed execution, shared state — variables, caches, connections, credentials, sessions — is not static. Each piece of state must be considered at each point where it is read or written by multiple actors. The agent traces state from creation through mutation to disposal, identifying windows where state is inconsistent, partially committed, or visible to actors that should not observe it. This is not limited to the categories below — any state that is shared, mutated, or time-dependent must be modeled across execution time, not just at a single snapshot.
+
 **Concurrency and shared state.** Hypotheses about loss of transaction isolation, context leakage between concurrent requests or coroutines, and race conditions on shared mutable state. When multiple execution contexts access the same resource without atomic synchronization, the agent must consider whether one context can observe or modify state belonging to another.
 
 **Credential lifecycle.** Hypotheses about race conditions during credential rotation, windows of vulnerability between invalidation and propagation, and concurrent usage of tokens or secrets during transitional states. A credential that is valid at time T1 may be invalid at time T2 — the agent must model this temporal boundary.
 
 **Idempotency and distributed consistency.** Hypotheses about duplicated side effects from automatic retries on non-idempotent operations, inconsistent state from partial failures across distributed services, and cascading retry patterns that amplify degradation. When an operation is retried, the agent must consider whether the retry is idempotent or whether it produces a different result each time.
+
+**Security controls undermined by retries.** Hypotheses about security mechanisms whose effectiveness degrades under retry conditions. A rate limiter that resets on each retry, an account lockout counter that allows retry storms to consume its budget, or an authorization check that permits degraded access during retry windows — these are cases where the control exists but is insufficient for the threat it faces under concurrent or repeated execution. The agent must distinguish between "the control is absent" and "the control is present but undermined by the execution model."
+
+**Distributed inconsistency resolution.** When a system can reach inconsistent state — whether through split brain, partial failures, or concurrent writes to independent replicas — the agent must consider how the system resolves inconsistencies. The resolution mechanism determines the security impact: last-writer-wins may silently discard authorized changes, manual reconciliation may leave the system in an inconsistent state indefinitely, and automatic merge may produce state that no party intended. The agent must evaluate the resolution mechanism, not just the inconsistency itself.
 
 # Evidence Evaluation Loop
 
@@ -57,6 +65,7 @@ Contradictory evidence triggers hypothesis revision. If two pieces of evidence c
 Non-deterministic evidence requires special handling. Race conditions, concurrent execution paths, and timing-dependent failures produce evidence that varies between identical runs. When the scenario involves concurrency or distributed coordination, the agent recognizes that static code review may be insufficient to confirm or deny a hypothesis. In these cases:
 
 - If the code lacks explicit defensive mechanisms — atomic operations, transaction isolation, idempotency keys, synchronization primitives — the agent classifies the risk as confirmed by absence of control. The absence of a defensive mechanism is itself evidence.
+- If the code includes a defensive mechanism, the agent evaluates whether the mechanism is sufficient for the threat model. A mechanism that is present but inadequate for the specific scenario — a rate limiter that can be circumvented by concurrent requests, a jitter that is too narrow to prevent thundering herds, a lock that does not cover the full critical section — does not eliminate the risk. The agent notes the mechanism, evaluates its sufficiency against the observed threat, and classifies the finding accordingly: confirmed if the mechanism is demonstrably insufficient, inferred if sufficiency is uncertain, or resolved only if the mechanism is sufficient for the specific threat.
 - If confirming or denying the hypothesis requires runtime data that the agent cannot observe — execution traces, concurrency telemetry, distributed transaction logs — the agent stops deterministic analysis and emits a structured flag: `[REQUIRES_EXTERNAL_EVIDENCE: <type>]`, specifying what traces, logs, or telemetry are needed to validate the hypothesis. This flag is not an admission of failure; it is an honest assessment that further evidence is required.
 
 # Decision Synthesis
@@ -72,6 +81,8 @@ Uncertainty is weighted explicitly. The agent communicates three levels:
 - **Uncertain.** Possible but not well supported by available evidence.
 
 Over-confidence is avoided by treating confidence as a spectrum, not a binary. The agent does not inflate certainty to appear authoritative. A conclusion stated at the appropriate confidence level is more useful than a strong conclusion built on weak evidence.
+
+When the system under analysis involves concurrent execution, shared state, or distributed coordination, conclusions about that system must be qualified for their temporal dependency. A finding that depends on execution ordering, shared state timing, or credential lifecycle is not universally reproducible — it may manifest under some interleavings but not others. The agent must note which conclusions are time-dependent and which are structurally guaranteed. A finding that is structurally guaranteed (such as missing input validation) holds regardless of execution order. A finding that is time-dependent (such as a race condition) holds only under specific interleavings of concurrent execution. This distinction prevents treating timing-dependent findings as if they were deterministic, and prevents dismissing them as unlikely just because they do not manifest on every run.
 
 # Output Construction Layer
 
