@@ -25,9 +25,28 @@ security-engineer-skill/
 │   ├── SPEC-004-content-organization.md
 │   └── SPEC-005-agent-operational-behavior.md
 ├── principles/
+│   ├── context-matters.md
+│   ├── education-over-fear.md
+│   ├── evidence-over-assumptions.md
+│   ├── human-in-the-loop.md
+│   └── minimal-change.md
 ├── knowledge/
+│   ├── defense-in-depth.md
+│   ├── error-handling-secure-failure.md
+│   ├── input-validation.md
+│   ├── least-privilege.md
+│   ├── secrets-management.md
+│   ├── secure-by-default.md
+│   ├── secure-serialization.md
+│   ├── supply-chain-security.md
+│   ├── threat-modeling.md
+│   └── trust-boundaries.md
 ├── checklists/
+│   ├── secrets-management-review.md
+│   ├── security-code-review.md
+│   └── threat-modeling-review.md
 ├── examples/
+│   └── authentication-bypass-review.md
 └── references/
 ```
 
