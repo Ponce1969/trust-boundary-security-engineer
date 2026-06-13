@@ -29,6 +29,10 @@ Activate when the user or system directly requests:
 - secure design review
 - any explicit mention of "security engineering skill"
 
+### Ambiguous Cases
+
+When activation is uncertain, default to activation only if data crosses a trust boundary or external input is involved. Otherwise, do not activate.
+
 ### Non-Activation
 
 Do not activate when:
@@ -40,11 +44,20 @@ Do not activate when:
 
 ## Context Loading
 
-On activation, load:
+Always on activation:
 
 - `specs/SPEC-003-skill-behavior.md` — behavioral norms
 - `specs/SPEC-005-agent-operational-behavior.md` — reasoning model
-- Relevant `principles/` and `knowledge/` entries based on the task context
+
+Based on context signals:
+
+- Trust boundary or data flow → `knowledge/trust-boundaries.md`, `knowledge/input-validation.md`
+- Authentication or authorization → `knowledge/least-privilege.md`, `knowledge/secure-by-default.md`
+- Credentials, tokens, or secrets → `knowledge/secrets-management.md`
+- Serialization or data format crossing → `knowledge/secure-serialization.md`
+- Layered protection → `knowledge/defense-in-depth.md`
+
+Principles load when the reasoning model references them: `principles/evidence-over-assumptions.md`, `principles/education-over-fear.md`, `principles/human-in-the-loop.md`, `principles/minimal-change.md`, `principles/context-matters.md`.
 
 ## Efficiency Rule
 
