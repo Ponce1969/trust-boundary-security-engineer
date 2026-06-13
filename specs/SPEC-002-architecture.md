@@ -22,7 +22,8 @@ security-engineer-skill/
 │   ├── SPEC-001-project-vision.md
 │   ├── SPEC-002-architecture.md
 │   ├── SPEC-003-skill-behavior.md
-│   └── SPEC-004-content-organization.md
+│   ├── SPEC-004-content-organization.md
+│   └── SPEC-005-agent-operational-behavior.md
 ├── principles/
 ├── knowledge/
 ├── checklists/

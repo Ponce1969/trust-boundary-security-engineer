@@ -56,6 +56,7 @@ Based on context signals:
 - Credentials, tokens, or secrets → `knowledge/secrets-management.md`
 - Serialization or data format crossing → `knowledge/secure-serialization.md`
 - Layered protection → `knowledge/defense-in-depth.md`
+- Dependencies, CI/CD, or supply chain → `knowledge/supply-chain-security.md`
 
 Principles load when the reasoning model references them: `principles/evidence-over-assumptions.md`, `principles/education-over-fear.md`, `principles/human-in-the-loop.md`, `principles/minimal-change.md`, `principles/context-matters.md`.
 

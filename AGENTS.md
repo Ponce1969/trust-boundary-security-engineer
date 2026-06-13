@@ -38,7 +38,7 @@ security-engineer-skill/
 ├── LICENSE            # License terms
 ├── AGENTS.md          # Agent behavior rules (this file)
 ├── SKILL.md           # Skill definition and triggers
-├── specs/             # Specification documents (SPEC-001 through SPEC-004)
+├── specs/             # Specification documents (SPEC-001 through SPEC-005)
 ├── principles/        # Security engineering principles
 ├── knowledge/         # Domain knowledge entries
 ├── checklists/        # Actionable security checklists
