@@ -68,6 +68,22 @@ See [`AGENTS.md`](AGENTS.md) for contribution guidelines and design principles.
 | [Secure Serialization](knowledge/secure-serialization.md) | Reconstruction is an active operation, not a passive one. |
 | [Trust Boundaries](knowledge/trust-boundaries.md) | Every point where data changes trust level is a security boundary. |
 | [Supply Chain Security](knowledge/supply-chain-security.md) | Every dependency is a trust decision — most are made implicitly. |
+| [Threat Modeling](knowledge/threat-modeling.md) | Identify risks before they become incidents, not after. |
+| [Error Handling and Secure Failure](knowledge/error-handling-secure-failure.md) | When something goes wrong, the system should become more restrictive, not less. |
+
+## Checklists
+
+| Checklist | Purpose |
+|-----------|---------|
+| [Security Code Review](checklists/security-code-review.md) | Review code changes for security concerns |
+| [Secrets Management Review](checklists/secrets-management-review.md) | Review how a system handles credentials and secrets |
+| [Threat Modeling Review](checklists/threat-modeling-review.md) | Conduct a structured threat model |
+
+## Examples
+
+| Example | Demonstrates |
+|---------|-------------|
+| [Authentication Bypass Review](examples/authentication-bypass-review.md) | Full reasoning loop: perception, context, hypothesis, evidence, output |
 
 ## License
 
