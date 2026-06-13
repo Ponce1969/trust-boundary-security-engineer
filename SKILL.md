@@ -60,6 +60,12 @@ Based on context signals:
 - Threat modeling or risk assessment → `knowledge/threat-modeling.md`
 - Error handling or failure behavior → `knowledge/error-handling-secure-failure.md`
 
+Checklists load based on task type:
+
+- Code review or code change analysis → `checklists/security-code-review.md`
+- Secrets, credentials, or tokens analysis → `checklists/secrets-management-review.md`
+- Threat modeling or architecture review → `checklists/threat-modeling-review.md`
+
 Principles load when the reasoning model references them: `principles/evidence-over-assumptions.md`, `principles/education-over-fear.md`, `principles/human-in-the-loop.md`, `principles/minimal-change.md`, `principles/context-matters.md`.
 
 ## Efficiency Rule

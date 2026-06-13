@@ -46,7 +46,8 @@ security-engineer-skill/
 │   ├── security-code-review.md
 │   └── threat-modeling-review.md
 ├── examples/
-│   └── authentication-bypass-review.md
+│   ├── authentication-bypass-review.md
+│   └── concurrent-payment-review.md
 └── references/
 ```
 

@@ -84,6 +84,7 @@ See [`AGENTS.md`](AGENTS.md) for contribution guidelines and design principles.
 | Example | Demonstrates |
 |---------|-------------|
 | [Authentication Bypass Review](examples/authentication-bypass-review.md) | Full reasoning loop: perception, context, hypothesis, evidence, output |
+| [Concurrent Payment Review](examples/concurrent-payment-review.md) | Temporal trust boundaries, concurrency hypotheses, idempotency, `[REQUIRES_EXTERNAL_EVIDENCE]` |
 
 ## License
 
