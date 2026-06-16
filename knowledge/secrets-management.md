@@ -38,6 +38,20 @@ Temporary convenience often becomes permanent risk. A hardcoded credential saved
 - **Secure by Default:** Secure by Default ensures systems start safe. Secrets Management ensures that the credentials those systems use are never embedded in the default configuration.
 - **Supply Chain Security:** Secrets Management is a supply chain concern. A leaked credential in a dependency or CI pipeline compromises the entire chain it serves.
 
+# How This Manifests as Specific Vulnerabilities
+
+When secrets are not managed through controlled mechanisms, the result depends on how the secret is exposed and what it grants access to:
+
+- **Hardcoded credential discovery** occurs when secrets are embedded in source code, configuration files, or version control. The secret travels to every clone, fork, and backup. Git history preserves it even after deletion from the current branch. The root cause is treating secrets as static configuration rather than as credentials that require lifecycle management (rotation, scoping, auditing).
+
+- **Broken authentication** occurs when credential verification is weak or bypassed. Passwords stored with fast hashes (MD5, SHA-256 without salt) can be cracked using precomputed tables. Session tokens that do not expire or rotate allow indefinite access after a single theft. The root cause is that authentication mechanisms must make legitimate access efficient and illegitimate access prohibitively expensive — fast hashing and permanent tokens fail the latter.
+
+- **Credential stuffing** occurs when credentials leaked from one service are used against another. The root cause is not weak storage on the target service, but the reuse of passwords across services. Secrets management cannot prevent users from reusing passwords, but it can detect and respond to unusual authentication patterns (rate limiting, anomaly detection, multi-factor authentication).
+
+- **Privilege escalation through over-privileged secrets** occurs when a service uses credentials with broader permissions than its function requires. A read-only API endpoint that connects to the database with write access creates a path from a minor vulnerability to a major breach. The root cause is that scoping credentials is more effort than reusing an existing broad key — but the blast radius of a compromised key is proportional to its permissions.
+
+All of these share the same structural pattern: **a credential gains access beyond what its intended function requires, either because it is exposed (hardcoded, leaked), because its verification is weak (fast hash, no rotation), or because its scope is too broad (over-privileged).** The defense is always the same principle — treat every credential as a high-value asset that must be uniquely scoped, securely stored, routinely rotated, and immediately revocable.
+
 # Success Criteria
 
 Secrets Management is working when:

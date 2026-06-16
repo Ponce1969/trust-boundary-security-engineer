@@ -36,6 +36,18 @@ Serialization is not just data transformation. It is a potential execution vecto
 - **Trust Boundaries:** Every deserialization point is a trust boundary. Data that crosses it must be treated as untrusted, regardless of where it originated.
 - **Supply Chain Security:** Serialized data in dependencies, caches, and message queues travels through the supply chain. Tampering at any point compromises every consumer.
 
+# How This Manifests as Specific Vulnerabilities
+
+When deserialization treats untrusted data as executable logic, the result depends on what the format allows the reconstructed object to do:
+
+- **Remote Code Execution via unsafe deserialization** occurs when a serialization format carries object type information and the deserializer reconstructs objects with executable behavior. Formats like Java serialization, Python pickle, and PHP `unserialize` allow the sender to specify which class to instantiate and what data to populate it with — including classes that execute code during construction or have dangerous methods that can be invoked after reconstruction. The root cause is that the deserializer trusts the sender to specify behavior, not just data.
+
+- **Insecure Direct Object Reference (IDOR)** occurs when serialized identifiers (UUIDs, database keys, file paths) are exposed to the client and accepted back without re-authorization. The serialization format is irrelevant — what matters is that the server deserializes the identifier and uses it to access a resource without verifying that the authenticated user is authorized for that specific resource.
+
+- **Cross-Site Request Forgery (CSRF)** occurs when the browser automatically attaches serialization tokens (cookies, session identifiers) to requests regardless of origin. The browser's automatic serialization of credentials creates a trust boundary failure: the server receives a valid serialized session, but cannot distinguish between a request the user intended and one crafted by an attacker.
+
+All of these share the same structural pattern: **the system reconstructs state from data that was not adequately validated, allowing the reconstructed state to carry more authority than the sender should have.** The defense is always the same principle — treat deserialized data as untrusted input, verify its integrity and authorization at the trust boundary, and use data-only formats when the sender is not trusted.
+
 # Success Criteria
 
 Secure Serialization is working when:

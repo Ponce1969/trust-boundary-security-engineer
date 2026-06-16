@@ -54,7 +54,15 @@ Identify the review context before starting:
 - [ ] Check that security-relevant settings are opt-in for insecure behavior, not opt-in for secure behavior.
 - [ ] Confirm that the change does not introduce unnecessary privileges or permissions. → `knowledge/least-privilege.md`
 
-## 7. Reporting
+## 7. Control Sufficiency
+
+- [ ] Verify that each security control is sufficient for the specific threat model, not merely present. A control that exists but is inadequate for the threat it faces is a different finding than a control that is absent. → `specs/SPEC-005-agent-operational-behavior.md`
+- [ ] Check whether rate limiting, throttling, or retry mechanisms can be circumvented under concurrent load or retry conditions. A rate limiter with narrow jitter may be insufficient under thundering herd conditions.
+- [ ] Verify that authentication controls (account lockout, rate limiting) cannot be weaponized to deny service to legitimate users. A lockout counter that allows unlimited attempts from different IPs is insufficient against distributed attacks.
+- [ ] Confirm that authorization checks cover the specific resource being accessed, not just whether the user is authenticated. An authorization check that verifies identity without verifying ownership is insufficient for preventing access to other users' resources.
+- [ ] Assess whether error handling reveals enough information to aid debugging but not enough to aid attackers. A generic error message that discloses the database engine version is insufficient for security.
+
+## 8. Reporting
 
 - [ ] Document findings with clear separation of observations (verified), inferences (supported but uncertain), and risks (conditional).
 - [ ] Prioritize findings by impact and context, not by category. → `principles/context-matters.md`

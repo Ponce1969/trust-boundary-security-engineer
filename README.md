@@ -169,6 +169,7 @@ security-engineer-skill/
 |---------|-------------|
 | [Authentication Bypass Review](examples/authentication-bypass-review.md) | Full reasoning loop: perception, context, hypothesis, evidence, output |
 | [Concurrent Payment Review](examples/concurrent-payment-review.md) | Temporal trust boundaries, state evolution modeling, execution model classification, defensive control sufficiency, temporal qualification, `[REQUIRES_EXTERNAL_EVIDENCE]` |
+| [TalkTalk Breach Case Study](examples/talktalk-case-study.md) | Real-world incident analysis: structurally guaranteed findings, confirmed by absence of control, defense in depth, legacy system risks |
 
 </details>
 

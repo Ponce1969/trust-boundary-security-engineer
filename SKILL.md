@@ -66,6 +66,12 @@ Checklists load based on task type:
 - Secrets, credentials, or tokens analysis → `checklists/secrets-management-review.md`
 - Threat modeling or architecture review → `checklists/threat-modeling-review.md`
 
+Examples load for reference when the reasoning model is applied to a similar scenario:
+
+- Authentication, input validation, or SQL Injection → `examples/authentication-bypass-review.md`
+- Concurrent execution, shared state, or distributed systems → `examples/concurrent-payment-review.md`
+- Real-world breach analysis or documented incident → `examples/talktalk-case-study.md`
+
 Principles load when the reasoning model references them: `principles/evidence-over-assumptions.md`, `principles/education-over-fear.md`, `principles/human-in-the-loop.md`, `principles/minimal-change.md`, `principles/context-matters.md`.
 
 ## Efficiency Rule

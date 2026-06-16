@@ -34,6 +34,18 @@ Malformed input is not always malicious. A mistyped date, a truncated JSON field
 - **Defense in Depth:** Input Validation is an early layer in Defense in Depth. When it fails or is bypassed, other layers should still contain the damage.
 - **Evidence over Assumptions:** Input Validation is the practical application of Evidence over Assumptions. It replaces the assumption that input is valid with the evidence that it was verified.
 
+# How This Manifests as Specific Vulnerabilities
+
+When input validation fails at a trust boundary, the result depends on where the untrusted data flows and how it is interpreted:
+
+- **SQL Injection** occurs when untrusted data flows into a database query and is interpreted as SQL commands. The root cause is that data and commands share the same channel — the database engine cannot distinguish the developer's intended query from the attacker's injected commands. Parameterized queries enforce separation by sending the query structure and data through different channels.
+
+- **Command Injection** occurs when untrusted data flows into a shell command and is interpreted as operating system instructions. The root cause is the same: data and commands share the same channel, and the shell cannot distinguish between the developer's intended command and the attacker's appended instructions.
+
+- **Cross-Site Scripting (XSS)** occurs when untrusted data flows into HTML output and is interpreted as executable script by the browser. The root cause is that the browser cannot distinguish between the developer's markup and the attacker's injected script tags. Context-appropriate encoding (HTML entity encoding, JavaScript encoding) treats markup characters as data, not as instructions.
+
+All of these share the same structural pattern: **untrusted input crosses a trust boundary and is interpreted as instructions instead of data.** The specific vulnerability depends on which interpreter receives the input (SQL engine, shell, browser), but the defense is always the same principle — define what is acceptable and reject everything else, enforced at the trust boundary.
+
 # Success Criteria
 
 Input Validation is working when:
