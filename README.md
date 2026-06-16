@@ -12,7 +12,7 @@
 [![Docs: Markdown](https://img.shields.io/badge/Format-Markdown-lightgrey.svg)]()
 [![Skill: v1.0](https://img.shields.io/badge/Skill-v1.0-green.svg)]()
 [![Scope: Security](https://img.shields.io/badge/Scope-Security_Engineering-critical.svg)]()
-[![Content: 5 specs · 10 knowledge · 6 principles · 3 checklists · 4 examples · 3 references](https://img.shields.io/badge/Content-5_specs_·_10_knowledge_·_6_principles_·_3_references-blueviolet.svg)]()
+[![Content: 5 specs · 12 knowledge · 6 principles · 4 checklists · 5 examples · 4 references](https://img.shields.io/badge/Content-5_specs_·_12_knowledge_·_6_principles_·_4_checklists_·_5_examples_·_4_refs-blueviolet.svg)]()
 
 </div>
 

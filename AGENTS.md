@@ -42,8 +42,12 @@ security-engineer-skill/
 ├── principles/        # Security engineering principles
 ├── knowledge/         # Domain knowledge entries
 ├── checklists/        # Actionable security checklists
-├── examples/          # Worked examples and walkthroughs
+├── examples/          # Worked walkthroughs
 └── references/        # External references and further reading
+    ├── owasp-and-vulnerability-standards.md
+    ├── owasp-llm-top10.md
+    ├── threat-modeling-frameworks.md
+    └── cloud-and-infrastructure-security.md
 ```
 
 ## Contribution Guidelines

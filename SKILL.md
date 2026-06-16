@@ -69,9 +69,11 @@ When uncertain, default to deep review if external input is involved or trust bo
 - Dependencies, CI/CD, or supply chain → `knowledge/supply-chain-security.md`
 - Threat modeling or risk assessment → `knowledge/threat-modeling.md`
 - Error handling or failure behavior → `knowledge/error-handling-secure-failure.md`
-- Cloud, IAC, or infrastructure configuration → `knowledge/least-privilege.md`, `knowledge/secrets-management.md`, `knowledge/supply-chain-security.md`
+- Cloud, IAC, or infrastructure configuration → `knowledge/least-privilege.md`, `knowledge/secrets-management.md`, `knowledge/supply-chain-security.md`, `references/cloud-and-infrastructure-security.md`
 - Evaluating whether a control is adequate (not just present) → `principles/control-sufficiency.md`
-- Agentic system, LLM application, or multi-agent architecture → `knowledge/prompt-injection.md`, `knowledge/agent-trust-model.md`
+- Agentic system, LLM application, or multi-agent architecture → `knowledge/prompt-injection.md`, `knowledge/agent-trust-model.md`, `references/owasp-llm-top10.md`
+- Vulnerability classification or CWE mapping needed → `references/owasp-and-vulnerability-standards.md`
+- Threat modeling methodology selection → `references/threat-modeling-frameworks.md`
 
 ### Checklists Load Based on Task Type
 
