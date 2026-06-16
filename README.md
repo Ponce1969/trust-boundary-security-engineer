@@ -12,7 +12,7 @@
 [![Docs: Markdown](https://img.shields.io/badge/Format-Markdown-lightgrey.svg)]()
 [![Skill: v1.0](https://img.shields.io/badge/Skill-v1.0-green.svg)]()
 [![Scope: Security](https://img.shields.io/badge/Scope-Security_Engineering-critical.svg)]()
-[![Content: 5 specs · 10 knowledge · 5 principles · 3 checklists · 2 examples](https://img.shields.io/badge/Content-5_specs_·_10_knowledge_·_5_principles-blueviolet.svg)]()
+[![Content: 5 specs · 10 knowledge · 6 principles · 3 checklists · 4 examples · 3 references](https://img.shields.io/badge/Content-5_specs_·_10_knowledge_·_6_principles_·_3_references-blueviolet.svg)]()
 
 </div>
 
@@ -130,6 +130,7 @@ security-engineer-skill/
 | [Human in the Loop](principles/human-in-the-loop.md) | Inform and support decisions. Never replace human judgment. |
 | [Minimal Change](principles/minimal-change.md) | Prefer the smallest safe change that solves the problem. |
 | [Context Matters](principles/context-matters.md) | Interpret every finding within its environment and intended use. |
+| [Control Sufficiency](principles/control-sufficiency.md) | A control that exists but is inadequate for the threat is a different finding than a control that is absent. |
 
 </details>
 
@@ -148,6 +149,8 @@ security-engineer-skill/
 | [Supply Chain Security](knowledge/supply-chain-security.md) | Every dependency is a trust decision — most are made implicitly. |
 | [Threat Modeling](knowledge/threat-modeling.md) | Identify risks before they become incidents, not after. |
 | [Error Handling and Secure Failure](knowledge/error-handling-secure-failure.md) | When something goes wrong, the system should become more restrictive, not less. |
+| [Prompt Injection](knowledge/prompt-injection.md) | When data and instructions share the same channel, data can become instructions. |
+| [Agent Trust Model](knowledge/agent-trust-model.md) | Operator, user, and environment are three different trust levels — collapsing them is the root cause of most agentic failures. |
 
 </details>
 
@@ -159,6 +162,19 @@ security-engineer-skill/
 | [Security Code Review](checklists/security-code-review.md) | Review code changes for security concerns |
 | [Secrets Management Review](checklists/secrets-management-review.md) | Review how a system handles credentials and secrets |
 | [Threat Modeling Review](checklists/threat-modeling-review.md) | Conduct a structured threat model |
+| [Agentic System Review](checklists/agentic-system-review.md) | Review an AI agent or multi-agent system before deployment |
+
+</details>
+
+<details>
+<summary><strong>📖 References — External sources and standards</strong></summary>
+
+| Reference | What it covers |
+|-----------|---------------|
+| [OWASP and Vulnerability Standards](references/owasp-and-vulnerability-standards.md) | OWASP Top 10, CWE Top 25, ASVS, Cheat Sheet Series — with direct mappings to this skill's knowledge files |
+| [Threat Modeling Frameworks](references/threat-modeling-frameworks.md) | STRIDE, PASTA, LINDDUN, Attack Trees, MITRE ATT&CK, NIST SP 800-30 — when and how to apply each |
+| [Cloud and Infrastructure Security](references/cloud-and-infrastructure-security.md) | AWS Well-Architected, CIS Benchmarks, CSA CCM, NIST SP 800-190 for containers, MITRE ATT&CK for Cloud |
+| [OWASP LLM Top 10](references/owasp-llm-top10.md) | The 10 most critical risks for LLM applications and agentic systems — mapped to this skill's knowledge files and checklists |
 
 </details>
 
@@ -170,20 +186,25 @@ security-engineer-skill/
 | [Authentication Bypass Review](examples/authentication-bypass-review.md) | Full reasoning loop: perception, context, hypothesis, evidence, output |
 | [Concurrent Payment Review](examples/concurrent-payment-review.md) | Temporal trust boundaries, state evolution modeling, execution model classification, defensive control sufficiency, temporal qualification, `[REQUIRES_EXTERNAL_EVIDENCE]` |
 | [TalkTalk Breach Case Study](examples/talktalk-case-study.md) | Real-world incident analysis: structurally guaranteed findings, confirmed by absence of control, defense in depth, legacy system risks |
+| [IAC and Cloud Misconfiguration Review](examples/iac-cloud-misconfiguration-review.md) | Cloud-native attack surfaces: IAM wildcard policies, public S3 buckets, hardcoded credentials in CI/CD, blast radius amplification |
+| [Prompt Injection Review](examples/prompt-injection-review.md) | Agentic systems: indirect injection via web retrieval, trust level collapse, capability chaining, blast radius as severity metric |
 
 </details>
 
 ## Platform Compatibility
 
-This skill works with any AI agent that reads `AGENTS.md` or `SKILL.md`:
+This skill works with any AI agent that reads `AGENTS.md` or `SKILL.md`. Each platform uses a different mechanism — the table below shows the correct integration point for each:
 
-| Platform | Setup |
-|----------|-------|
-| **OpenCode** | Place `SKILL.md` in `~/.config/opencode/skills/security-engineer/` |
-| **Claude Code** | Reference `AGENTS.md` in the project root |
-| **Cursor** | Include `AGENTS.md` in workspace settings |
-| **Gemini CLI** | Reference `AGENTS.md` as context |
-| **Any agent** | Point to `SKILL.md` as the activation contract |
+| Platform | Integration file | How to activate |
+|----------|-----------------|-----------------|
+| **Kiro** | `SKILL.md` | Place in `.kiro/skills/security-engineer/` in the workspace |
+| **OpenCode** | `SKILL.md` | Place in `~/.config/opencode/skills/security-engineer/` |
+| **Claude Code** | `CLAUDE.md` | Copy or reference `AGENTS.md` content into `CLAUDE.md` at the project root |
+| **Cursor** | `.cursorrules` | Copy or reference `AGENTS.md` content into `.cursorrules` |
+| **Gemini CLI** | `GEMINI.md` | Copy or reference `AGENTS.md` content into `GEMINI.md` |
+| **Any agent** | `SKILL.md` or `AGENTS.md` | Point the agent to `SKILL.md` as the activation contract. If the platform reads a different file, copy the activation rules into that file. |
+
+**Note on portability:** The skill content (knowledge, principles, checklists, examples) is platform-agnostic Markdown. Only the activation contract (the file that tells the agent when and what to load) needs to be adapted per platform.
 
 ## Quick Start
 

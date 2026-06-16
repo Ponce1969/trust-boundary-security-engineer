@@ -44,35 +44,60 @@ Do not activate when:
 
 ## Context Loading
 
-Always on activation:
+### Analysis Depth
+
+Before loading context, classify the review depth required:
+
+**Lightweight review** — a focused change with limited blast radius (a single function, a configuration value, a dependency update). Load only the directly relevant knowledge file and checklist. Skip examples unless the pattern closely matches.
+
+**Deep review** — a system with multiple trust boundaries, concurrent execution, distributed coordination, or high-stakes data (credentials, payments, PII, infrastructure). Load the full context chain: knowledge, checklist, and the most relevant example. Apply the full six-step reasoning model from SPEC-005.
+
+When uncertain, default to deep review if external input is involved or trust boundaries are crossed.
+
+### Always on Activation
 
 - `specs/SPEC-003-skill-behavior.md` — behavioral norms
 - `specs/SPEC-005-agent-operational-behavior.md` — reasoning model
 
-Based on context signals:
+### Based on Context Signals
 
 - Trust boundary or data flow → `knowledge/trust-boundaries.md`, `knowledge/input-validation.md`
 - Authentication or authorization → `knowledge/least-privilege.md`, `knowledge/secure-by-default.md`
 - Credentials, tokens, or secrets → `knowledge/secrets-management.md`
 - Serialization or data format crossing → `knowledge/secure-serialization.md`
-- Layered protection → `knowledge/defense-in-depth.md`
+- Layered protection or blast radius analysis → `knowledge/defense-in-depth.md`
 - Dependencies, CI/CD, or supply chain → `knowledge/supply-chain-security.md`
 - Threat modeling or risk assessment → `knowledge/threat-modeling.md`
 - Error handling or failure behavior → `knowledge/error-handling-secure-failure.md`
+- Cloud, IAC, or infrastructure configuration → `knowledge/least-privilege.md`, `knowledge/secrets-management.md`, `knowledge/supply-chain-security.md`
+- Evaluating whether a control is adequate (not just present) → `principles/control-sufficiency.md`
+- Agentic system, LLM application, or multi-agent architecture → `knowledge/prompt-injection.md`, `knowledge/agent-trust-model.md`
 
-Checklists load based on task type:
+### Checklists Load Based on Task Type
 
 - Code review or code change analysis → `checklists/security-code-review.md`
 - Secrets, credentials, or tokens analysis → `checklists/secrets-management-review.md`
 - Threat modeling or architecture review → `checklists/threat-modeling-review.md`
+- Agentic system or LLM application review → `checklists/agentic-system-review.md`
 
-Examples load for reference when the reasoning model is applied to a similar scenario:
+### Examples Load for Reference When the Reasoning Model is Applied to a Similar Scenario
 
 - Authentication, input validation, or SQL Injection → `examples/authentication-bypass-review.md`
 - Concurrent execution, shared state, or distributed systems → `examples/concurrent-payment-review.md`
 - Real-world breach analysis or documented incident → `examples/talktalk-case-study.md`
+- Cloud configuration, IAC, or CI/CD pipeline security → `examples/iac-cloud-misconfiguration-review.md`
+- Agentic system, prompt injection, or multi-agent trust → `examples/prompt-injection-review.md`
 
-Principles load when the reasoning model references them: `principles/evidence-over-assumptions.md`, `principles/education-over-fear.md`, `principles/human-in-the-loop.md`, `principles/minimal-change.md`, `principles/context-matters.md`.
+### Principles Load When the Reasoning Model References Them
+
+`principles/evidence-over-assumptions.md`, `principles/education-over-fear.md`, `principles/human-in-the-loop.md`, `principles/minimal-change.md`, `principles/context-matters.md`, `principles/control-sufficiency.md`
+
+### References Load for External Validation and Classification
+
+- Classifying a finding by vulnerability type → `references/owasp-and-vulnerability-standards.md`
+- Threat modeling methodology selection → `references/threat-modeling-frameworks.md`
+- Cloud, IAC, or container security standards → `references/cloud-and-infrastructure-security.md`
+- LLM application or agentic system risk classification → `references/owasp-llm-top10.md`
 
 ## Efficiency Rule
 

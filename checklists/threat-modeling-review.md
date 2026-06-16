@@ -32,6 +32,13 @@ Define the scope before modeling:
 - [ ] For each privilege level, ask: what can an actor with this access do that they should not? → `knowledge/least-privilege.md`
 - [ ] Consider both external attackers and internal misuse, misconfiguration, and accidental data exposure.
 - [ ] Consider threats to availability, integrity, and confidentiality — not only one category. → `knowledge/threat-modeling.md`
+- [ ] Apply STRIDE per trust boundary to generate a mandatory hypothesis set: → `references/threat-modeling-frameworks.md`
+  - **Spoofing** — can an actor falsely claim an identity to cross this boundary?
+  - **Tampering** — can data crossing this boundary be modified without detection?
+  - **Repudiation** — can an actor deny having crossed this boundary, and would the system be unable to prove they did?
+  - **Information Disclosure** — can data crossing this boundary be observed by an unauthorized actor?
+  - **Denial of Service** — can this boundary crossing be abused to degrade availability for legitimate actors?
+  - **Elevation of Privilege** — can crossing this boundary grant more access than the actor is entitled to?
 
 ## 4. Evaluate Impact and Likelihood
 

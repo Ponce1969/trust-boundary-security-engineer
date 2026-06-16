@@ -26,15 +26,18 @@ security-engineer-skill/
 │   └── SPEC-005-agent-operational-behavior.md
 ├── principles/
 │   ├── context-matters.md
+│   ├── control-sufficiency.md
 │   ├── education-over-fear.md
 │   ├── evidence-over-assumptions.md
 │   ├── human-in-the-loop.md
 │   └── minimal-change.md
 ├── knowledge/
+│   ├── agent-trust-model.md
 │   ├── defense-in-depth.md
 │   ├── error-handling-secure-failure.md
 │   ├── input-validation.md
 │   ├── least-privilege.md
+│   ├── prompt-injection.md
 │   ├── secrets-management.md
 │   ├── secure-by-default.md
 │   ├── secure-serialization.md
@@ -42,13 +45,21 @@ security-engineer-skill/
 │   ├── threat-modeling.md
 │   └── trust-boundaries.md
 ├── checklists/
+│   ├── agentic-system-review.md
 │   ├── secrets-management-review.md
 │   ├── security-code-review.md
 │   └── threat-modeling-review.md
 ├── examples/
 │   ├── authentication-bypass-review.md
-│   └── concurrent-payment-review.md
+│   ├── concurrent-payment-review.md
+│   ├── iac-cloud-misconfiguration-review.md
+│   ├── prompt-injection-review.md
+│   └── talktalk-case-study.md
 └── references/
+    ├── cloud-and-infrastructure-security.md
+    ├── owasp-and-vulnerability-standards.md
+    ├── owasp-llm-top10.md
+    └── threat-modeling-frameworks.md
 ```
 
 # Directory Responsibilities
