@@ -46,6 +46,7 @@ security-engineer-skill/
 │   └── trust-boundaries.md
 ├── checklists/
 │   ├── agentic-system-review.md
+│   ├── repository-entry-scan.md
 │   ├── secrets-management-review.md
 │   ├── security-code-review.md
 │   └── threat-modeling-review.md

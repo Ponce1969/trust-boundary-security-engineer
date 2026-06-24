@@ -159,6 +159,7 @@ security-engineer-skill/
 
 | Checklist | Purpose |
 |-----------|---------|
+| [Repository Entry Scan](checklists/repository-entry-scan.md) | Entry protocol for any unfamiliar repository — classify, scan for signals, select the right checklist |
 | [Security Code Review](checklists/security-code-review.md) | Review code changes for security concerns |
 | [Secrets Management Review](checklists/secrets-management-review.md) | Review how a system handles credentials and secrets |
 | [Threat Modeling Review](checklists/threat-modeling-review.md) | Conduct a structured threat model |

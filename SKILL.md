@@ -70,6 +70,8 @@ When uncertain, default to deep review if external input is involved or trust bo
 - Threat modeling or risk assessment → `knowledge/threat-modeling.md`
 - Error handling or failure behavior → `knowledge/error-handling-secure-failure.md`
 - Cloud, IAC, or infrastructure configuration → `knowledge/least-privilege.md`, `knowledge/secrets-management.md`, `knowledge/supply-chain-security.md`, `references/cloud-and-infrastructure-security.md`
+- Docker, containers, or microservice networking → `knowledge/trust-boundaries.md`, `knowledge/least-privilege.md`
+- Password reset, credential lifecycle, or token usage → `knowledge/secrets-management.md`, `principles/control-sufficiency.md`
 - Evaluating whether a control is adequate (not just present) → `principles/control-sufficiency.md`
 - Agentic system, LLM application, or multi-agent architecture → `knowledge/prompt-injection.md`, `knowledge/agent-trust-model.md`, `references/owasp-llm-top10.md`
 - Vulnerability classification or CWE mapping needed → `references/owasp-and-vulnerability-standards.md`
@@ -77,6 +79,7 @@ When uncertain, default to deep review if external input is involved or trust bo
 
 ### Checklists Load Based on Task Type
 
+- Reviewing an unfamiliar repository or project from scratch → `checklists/repository-entry-scan.md`
 - Code review or code change analysis → `checklists/security-code-review.md`
 - Secrets, credentials, or tokens analysis → `checklists/secrets-management-review.md`
 - Threat modeling or architecture review → `checklists/threat-modeling-review.md`
@@ -89,6 +92,7 @@ When uncertain, default to deep review if external input is involved or trust bo
 - Real-world breach analysis or documented incident → `examples/talktalk-case-study.md`
 - Cloud configuration, IAC, or CI/CD pipeline security → `examples/iac-cloud-misconfiguration-review.md`
 - Agentic system, prompt injection, or multi-agent trust → `examples/prompt-injection-review.md`
+- Docker containers, microservice networking, password reset tokens, or XSS in server-rendered HTML → `examples/web-app-container-audit.md`
 
 ### Principles Load When the Reasoning Model References Them
 
