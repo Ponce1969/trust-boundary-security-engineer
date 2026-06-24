@@ -77,3 +77,45 @@ security-engineer-skill/
 - Merge only when the content is clear, correct, and concise.
 - When a file grows beyond a single concern, split it — don't create a new directory.
 - If a principle, checklist entry, or example doesn't teach something specific, remove it.
+
+## When an Agent Learns from a Real Project
+
+This section is specifically for AI agents that have used this skill to review a real project, found real vulnerabilities, and want to contribute that learning back to the skill.
+
+If you reviewed a project and found something worth preserving — a pattern that is not covered, a scenario that adds to the examples, a reference that belongs in the knowledge base — follow this protocol before creating or modifying any file.
+
+### Decision tree
+
+**Did you find a vulnerability pattern that no existing `knowledge/` file covers?**
+→ Create `knowledge/<concept-name>.md`. Follow the structure of existing knowledge files: what it is, why it matters, common risks and misconceptions, relationship to other concepts, success criteria. Do not duplicate content that already exists — add a reference instead.
+
+**Did you apply the skill's reasoning model to a real scenario and produce a full finding?**
+→ Create `examples/<project-type>-<vulnerability-type>-review.md`. Follow the six-step structure of existing examples. Name the file after what the example demonstrates, not after the specific project. The goal is a walkthrough that teaches transferable reasoning, not a project-specific report.
+
+**Did you encounter a standard, framework, or external source that would improve a reference file?**
+→ Add an entry to the relevant file in `references/`. State what the source covers and why it is relevant. Keep the annotation to two sentences maximum.
+
+**Did you find a new context signal that should trigger context loading in the skill?**
+→ Update `SKILL.md` context loading rules only. Do not modify any other file for this purpose.
+
+### Rules that must not be broken
+
+- **Never modify `specs/SPEC-005-agent-operational-behavior.md` directly.** This is the core reasoning model. Changes to it affect every analysis the skill produces. If you believe the reasoning model needs updating, document the proposed change as a comment in the relevant example file and flag it for human review.
+- **Never create a new directory.** All content belongs in existing directories. If no directory fits, the content may not belong in this skill.
+- **Never add content that duplicates an existing file.** If the knowledge already exists, add a reference to it. Duplication inflates the skill without adding value.
+- **Always update these three files when adding a new file:** `SKILL.md` (context loading), `README.md` (relevant table), `specs/SPEC-002-architecture.md` (structure). A file that is not registered in these three places will not be loaded by agents.
+
+### Commit format for agent-generated learning
+
+When committing changes that came from real project findings, use this prefix so the history shows what the skill absorbed:
+
+```
+learn: <what was found> in <project type>
+
+Example:
+learn: password reset token race condition in Python/PostgreSQL web app
+learn: IAM wildcard policy in Terraform infrastructure review
+learn: indirect prompt injection via knowledge base in research agent
+```
+
+This prefix distinguishes organic learning from deliberate design decisions and makes it easy to trace which real-world findings shaped the skill over time.
