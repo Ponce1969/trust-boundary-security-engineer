@@ -12,7 +12,7 @@
 [![Docs: Markdown](https://img.shields.io/badge/Format-Markdown-lightgrey.svg)]()
 [![Skill: v1.0](https://img.shields.io/badge/Skill-v1.0-green.svg)]()
 [![Scope: Security](https://img.shields.io/badge/Scope-Security_Engineering-critical.svg)]()
-[![Content: 5 specs · 12 knowledge · 6 principles · 4 checklists · 5 examples · 4 references](https://img.shields.io/badge/Content-5_specs_·_12_knowledge_·_6_principles_·_4_checklists_·_5_examples_·_4_refs-blueviolet.svg)]()
+[![Content: 5 specs · 12 knowledge · 6 principles · 5 checklists · 6 examples · 4 references](https://img.shields.io/badge/Content-5_specs_·_12_knowledge_·_6_principles_·_5_checklists_·_6_examples_·_4_refs-blueviolet.svg)]()
 
 </div>
 
@@ -189,6 +189,7 @@ security-engineer-skill/
 | [TalkTalk Breach Case Study](examples/talktalk-case-study.md) | Real-world incident analysis: structurally guaranteed findings, confirmed by absence of control, defense in depth, legacy system risks |
 | [IAC and Cloud Misconfiguration Review](examples/iac-cloud-misconfiguration-review.md) | Cloud-native attack surfaces: IAM wildcard policies, public S3 buckets, hardcoded credentials in CI/CD, blast radius amplification |
 | [Prompt Injection Review](examples/prompt-injection-review.md) | Agentic systems: indirect injection via web retrieval, trust level collapse, capability chaining, blast radius as severity metric |
+| [Web App Container Audit](examples/web-app-container-audit.md) | TOCTOU in password reset, Docker network trust boundaries, XSS in server-rendered HTML, control sufficiency in rate limiting |
 
 </details>
 
