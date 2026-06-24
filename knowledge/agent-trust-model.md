@@ -63,6 +63,29 @@ This is a form of persistent injection: the attacker does not need access to the
 
 The trust model must treat memory reads with the same skepticism as any other external data source. Content retrieved from memory is environment-level trust, not operator-level trust — even if the agent itself wrote it in a previous session.
 
+# Semantic Race Condition
+
+In concurrent multi-agent systems, trust is not only a spatial property — it is also temporal. The trust level effectively assigned to an instruction depends on *when* that instruction entered the agent's context, not only *where* it came from.
+
+A **semantic race condition** occurs when an attacker manipulates the timing or asynchronous flow of messages to inject environment-level content into the agent's episodic memory at a moment when the agent's attention is degraded or its context is saturated. Under these conditions, the injected content may be processed as if it carried higher trust than it would receive in isolation.
+
+This creates a class of vulnerability that static analysis cannot detect. The code may be correct. The trust hierarchy may be correctly defined. The injection succeeds because of *when* the malicious content arrived relative to the agent's execution state.
+
+**How it manifests:**
+
+- An orchestrator receives asynchronous responses from multiple subagents simultaneously. The responses arrive out of order. A malicious response crafted to resemble an authoritative subagent output arrives at the moment the orchestrator is processing a high-priority task, and is incorporated into the working context without full evaluation.
+- A long-running agent accumulates context across many tool calls. As the context window fills, the model's effective attention to early operator instructions degrades. An injection planted late in the session — after significant context accumulation — has a higher probability of being treated as authoritative than the same injection at session start.
+- Two subagents write to shared memory concurrently. One write is a legitimate update; the other is an injected instruction. The order of resolution determines which one shapes the orchestrator's next reasoning step.
+
+**What to look for when reviewing a multi-agent system:**
+
+- Does the orchestrator process subagent responses sequentially with full evaluation, or does it merge concurrent responses without ordering guarantees?
+- Is there a mechanism to detect context saturation and reset or summarize the working memory before it degrades attention to operator-level constraints?
+- Are writes to shared memory from multiple agents serialized and validated, or is the last writer's content accepted without verification?
+- Does the system treat the timing of an instruction's arrival as irrelevant to its trust level, or does it have safeguards that maintain trust evaluation independent of execution order?
+
+A semantic race condition is a time-dependent finding. It does not manifest on every run. It manifests under specific interleavings of concurrent execution — which means it may not appear during testing but will appear under adversarial conditions designed to exploit the timing. → `specs/SPEC-005-agent-operational-behavior.md`
+
 # Relationship to Other Concepts
 
 - **Trust Boundaries:** The agentic trust hierarchy is an extension of spatial trust boundaries to the agent's internal authority model. The boundary between operator trust and environment trust is the most critical one to maintain. → `knowledge/trust-boundaries.md`

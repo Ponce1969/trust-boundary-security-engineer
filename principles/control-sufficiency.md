@@ -41,6 +41,23 @@ When evaluating any security control:
 
 **Transaction isolation — insufficient when session pool is not isolated.** A database with transaction isolation enabled has a data integrity control. If the session pool returns sessions with uncommitted state from previous operations, the isolation guarantee does not extend to session reuse. The control exists at the database layer; it is insufficient at the application layer.
 
+# Three-Layer Sufficiency Framework for Agentic Systems
+
+When evaluating a security control in an agentic system, a prompt-level defense alone is never sufficient. Evaluate the control across three independent layers. A control is only sufficient when all three layers provide independent containment — if the semantic layer fails, the architecture layer must still hold.
+
+**Layer 1 — Semantic (prompt-level):** Does the agent's system prompt or instruction set constrain the behavior? This layer is the most fragile. It can be overridden by a sufficiently authoritative injection. A finding based solely on a prompt instruction ("do not follow external instructions") is classified as *present but insufficient* unless layers 2 and 3 also hold.
+
+**Layer 2 — Architectural (isolation/sandboxing):** If the semantic layer is bypassed — if the agent is successfully injected — does the architecture prevent harm? This includes: tool execution in isolated sandboxes, containers with blocked network egress, read-only filesystem access, and no persistent state between invocations. An architectural control is independent of what the model decides. It holds even when the model is compromised.
+
+**Layer 3 — API/Tool (least privilege):** Are the tools and APIs the agent can invoke scoped to the minimum required for the task? Ephemeral access tokens per invocation, typed tool contracts with strict schemas, and explicitly denied operations reduce the blast radius even when both layers 1 and 2 have failed.
+
+**How to apply this framework:** When evaluating a control, ask in sequence:
+1. Does layer 1 exist? If yes, can it be bypassed by injection? If yes → insufficient alone.
+2. Does layer 2 exist? If yes, does it hold even when the model is fully compromised? If no → insufficient alone.
+3. Does layer 3 exist? If yes, what is the maximum harm achievable even with full layers 1 and 2 failure?
+
+A finding is only resolved when all three layers provide independent containment for the specific threat. → `knowledge/defense-in-depth.md`, `knowledge/agent-trust-model.md`
+
 # Anti-Patterns
 
 - Marking a finding as resolved because a control is present without verifying its sufficiency.
