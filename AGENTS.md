@@ -6,6 +6,25 @@ This repository defines a portable AI Skill for Security Engineering. Its goal i
 
 This is a documentation-first project. It contains no executable code.
 
+## How to Use This Skill
+
+Three entry points depending on what you need:
+
+| Goal | Start here |
+|------|-----------|
+| Review an unfamiliar project for vulnerabilities | `checklists/repository-entry-scan.md` |
+| Understand how to reason about security | `specs/SPEC-005-agent-operational-behavior.md` |
+| Know what to load for a specific context | `SKILL.md` |
+
+**The full cycle for a project review:**
+1. Read `SKILL.md` — understand when this skill activates and what to load
+2. Open the project and run `checklists/repository-entry-scan.md` — classify, scan, orient
+3. Apply `specs/SPEC-005-agent-operational-behavior.md` — the six-step reasoning model
+4. Use the checklist selected in step 2 for the deeper review
+5. If you find something worth preserving → follow "When an Agent Learns from a Real Project" at the bottom of this file
+
+---
+
 ## Project Philosophy
 
 - **Knowledge is the asset.** The skill transmits expertise through structured documentation, not through scripts or tools.
