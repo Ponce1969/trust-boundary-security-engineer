@@ -65,6 +65,19 @@ security-engineer-skill/
 
 # Directory Responsibilities
 
+Each directory has a single verb that defines its role in the skill. When an agent is unsure where content belongs, the verb answers the question.
+
+| Directory | Verb | Role |
+|-----------|------|------|
+| `specs/` | **governs** | Defines what the project is and how it is structured |
+| `principles/` | **decides** | Guides reasoning when evidence is ambiguous |
+| `knowledge/` | **explains** | Teaches what a concept is and why it matters |
+| `checklists/` | **verifies** | Confirms that specific controls or patterns are present |
+| `examples/` | **demonstrates** | Shows the reasoning model applied to a real scenario |
+| `references/` | **points** | Links to external standards, frameworks, and sources |
+
+A file must serve exactly one of these verbs. If content serves two verbs, it belongs in two files — one per directory — with references between them. For example, JWT explained lives in `knowledge/secrets-management.md`. JWT checked lives in `checklists/secrets-management-review.md`. JWT classified lives in `references/owasp-and-vulnerability-standards.md`. Never combine these responsibilities in a single file.
+
 ## specs/
 
 Definitions of what the project is, how it is structured, how it behaves, and how its content is organized. Each spec addresses one concern and is numbered sequentially. Specs are normative: they describe what the project intends, not how it is implemented.
@@ -106,6 +119,20 @@ Curated pointers to external sources. Each entry states what the source covers a
 
 - **Belongs:** Links, book references, standards, specifications, further reading.
 - **Does not belong:** Original content, explanations, checklists, examples.
+
+# Modification Tiers
+
+Not all files carry the same weight. Changes to higher-tier files affect everything below them. The higher the tier, the harder it is to modify.
+
+| Tier | Files | Modification rule |
+|------|-------|-------------------|
+| **Tier 1** | `specs/SPEC-005-agent-operational-behavior.md` | **Never modify directly.** Document proposed changes as a comment in the relevant example file and flag for human review. |
+| **Tier 2** | `specs/SPEC-001` through `SPEC-004` | Requires human review. Changes to architecture, behavior, or content organization affect every file in the repository. |
+| **Tier 3** | `principles/*` | Requires human review. A principle change alters how the reasoning model interprets evidence. |
+| **Tier 4** | `knowledge/*`, `checklists/*` | Agent may add new files following the contribution protocol. Agent may modify existing files only to add references or fix factual errors. |
+| **Tier 5** | `examples/*`, `references/*` | Agent may add new files following the contribution protocol. Agent may extend existing files with new entries. |
+
+The rule is simple: **the higher the tier, the more expensive the mistake.** A bad example teaches the wrong lesson. A bad principle corrupts every analysis. A bad SPEC-005 edit degrades the entire skill.
 
 # Architectural Constraints
 

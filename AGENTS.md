@@ -114,14 +114,20 @@ If you reviewed a project and found something worth preserving — a pattern tha
 **Did you encounter a standard, framework, or external source that would improve a reference file?**
 → Add an entry to the relevant file in `references/`. State what the source covers and why it is relevant. Keep the annotation to two sentences maximum.
 
+**Did you find a new verification step or review pattern that should be repeated?**
+→ Create `checklists/<task-name>-review.md`. Follow the structure of existing checklists: ordered steps, each starting with a verb, no embedded explanations (link to knowledge files instead). Register in SKILL.md, README.md, and SPEC-002.
+
 **Did you find a new context signal that should trigger context loading in the skill?**
 → Update `SKILL.md` context loading rules only. Do not modify any other file for this purpose.
 
+**Did you discover a new rule of reasoning — a way the reasoning model should work that SPEC-005 does not cover?**
+→ Do NOT modify SPEC-005 directly. Document the proposed change as a comment at the bottom of the relevant example file and flag it for human review. A reasoning rule is a Tier 1 change — it affects every analysis the skill will ever produce.
+
 ### Rules that must not be broken
 
-- **Never modify `specs/SPEC-005-agent-operational-behavior.md` directly.** This is the core reasoning model. Changes to it affect every analysis the skill produces. If you believe the reasoning model needs updating, document the proposed change as a comment in the relevant example file and flag it for human review.
+- **Never modify Tier 1 or Tier 2 files without human review.** See Modification Tiers in `specs/SPEC-002-architecture.md`. SPEC-005 is Tier 1 — never modify directly, always flag for human review via example file comments.
 - **Never create a new directory.** All content belongs in existing directories. If no directory fits, the content may not belong in this skill.
-- **Never add content that duplicates an existing file.** If the knowledge already exists, add a reference to it. Duplication inflates the skill without adding value.
+- **Never add content that duplicates an existing file.** Follow the Pre-Creation Procedure in `specs/SPEC-004-content-organization.md` before creating any new file. If the knowledge already exists, add a reference to it.
 - **Always update these three files when adding a new file:** `SKILL.md` (context loading), `README.md` (relevant table), `specs/SPEC-002-architecture.md` (structure). A file that is not registered in these three places will not be loaded by agents.
 
 ### Commit format for agent-generated learning
