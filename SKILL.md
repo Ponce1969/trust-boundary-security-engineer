@@ -1,3 +1,12 @@
+---
+name: security-engineer
+description: "Trigger: security review, vulnerability analysis, threat modeling, code audit, secure design review, security engineering skill. Activates a security-engineering lens that changes the decision when code, authentication, authorization, credentials, tokens, secrets, data flows, trust boundaries, or infrastructure configuration are involved. Loads context-conditioned knowledge, checklists, examples, principles, and references."
+license: Apache-2.0
+metadata:
+  author: clau-cerra
+  version: "1.0"
+---
+
 # Security Engineering Skill
 
 ## Activation

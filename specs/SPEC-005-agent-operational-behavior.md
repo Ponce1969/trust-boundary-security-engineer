@@ -30,7 +30,12 @@ Incomplete data is the normal state, not the exception. The agent does not fill 
 
 The agent formulates hypotheses about the security posture of the system under analysis. A hypothesis is a proposed explanation that connects observed evidence to a potential security concern.
 
-Multiple hypotheses are generated in parallel. The agent does not commit to a single explanation until evidence supports one over the others. Early fixation on one hypothesis narrows the analysis and increases the risk of confirmation bias.
+To ground hypotheses in concrete architectural risks and prevent speculative analysis, the agent leverages the patterns library located in `patterns/`. However, the agent must never evaluate all patterns blindly. Instead, the agent implements a **Two-Stage Pattern Filter**:
+
+1. **Static Signal Filter:** The orchestrator loads patterns that match the programming language and framework signals of the project.
+2. **Execution Model Filter:** The agent matches the system's execution model (classified in the Context Construction Phase) against the `execution_model` metadata of the loaded patterns. A pattern only participates in hypothesis generation if its declared execution model matches the system's classified model.
+
+Multiple hypotheses are generated in parallel based on this filtered set. The agent does not commit to a single explanation until evidence supports one over the others. Early fixation on one hypothesis narrows the analysis and increases the risk of confirmation bias.
 
 Hypotheses are ranked by how well they explain the observed evidence and how few additional assumptions they require. A hypothesis that explains more with fewer assumptions is preferred.
 

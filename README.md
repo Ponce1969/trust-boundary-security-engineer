@@ -101,6 +101,7 @@ security-engineer-skill/
 ├── principles/            ← How the skill thinks
 ├── knowledge/             ← What the skill knows
 ├── checklists/            ← What the skill checks
+├── patterns/              ← Concrete security patterns (emerging, validated, established)
 ├── examples/              ← How the skill applies
 └── references/            ← Where the skill points
 ```
@@ -164,6 +165,19 @@ security-engineer-skill/
 | [Secrets Management Review](checklists/secrets-management-review.md) | Review how a system handles credentials and secrets |
 | [Threat Modeling Review](checklists/threat-modeling-review.md) | Conduct a structured threat model |
 | [Agentic System Review](checklists/agentic-system-review.md) | Review an AI agent or multi-agent system before deployment |
+
+</details>
+
+<details>
+<summary><strong>🧩 Patterns — Real-world security templates</strong></summary>
+
+| ID | Pattern | Execution Model | Confidence |
+|---|---|---|---|
+| [PAT-001](patterns/PAT-001-mutable-singleton.md) | Mutable Singleton | Concurrent | established |
+| [PAT-002](patterns/PAT-002-lifetime-mismatch.md) | Request Lifetime Mismatch | Concurrent | established |
+| [PAT-003](patterns/PAT-003-background-task-lifetime-leak.md) | Background Task Lifetime Leak | Concurrent | validated |
+| [PAT-004](patterns/PAT-004-secret-reuse.md) | Cryptographic Secret Reuse | Sequential, Concurrent, Distributed, Mixed | established |
+| [PAT-005](patterns/PAT-005-insufficient-control.md) | Control Present but Insufficient | Concurrent | validated |
 
 </details>
 
