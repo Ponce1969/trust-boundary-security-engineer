@@ -2,17 +2,17 @@
 
 # Trust Boundary
 
-**Security Engineering Skill for AI Agents**
+**Stable / Technology-Agnostic Security Reasoning Core for AI Agents**
 
-*A portable, documentation-first reasoning framework that teaches agents to think like responsible security engineers — adversarially, methodically, and with evidence over assumptions.*
+*A portable, documentation-first reasoning framework that teaches agents to think like responsible senior security engineers — adversarially, methodically, and with evidence over assumptions.*
 
 **No code · No packages · No installation · Just knowledge, principles, and structured reasoning**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Docs: Markdown](https://img.shields.io/badge/Format-Markdown-lightgrey.svg)]()
 [![Skill: v1.0](https://img.shields.io/badge/Skill-v1.0-green.svg)]()
-[![Scope: Security](https://img.shields.io/badge/Scope-Security_Engineering-critical.svg)]()
-[![Content: 5 specs · 12 knowledge · 6 principles · 5 checklists · 6 examples · 4 references](https://img.shields.io/badge/Content-5_specs_·_12_knowledge_·_6_principles_·_5_checklists_·_6_examples_·_4_refs-blueviolet.svg)]()
+[![Scope: Security Core](https://img.shields.io/badge/Scope-Security_Reasoning_Core-critical.svg)]()
+[![Content: 6 specs · 10 knowledge · 6 principles · 4 checklists · 5 examples · 3 references](https://img.shields.io/badge/Content-6_specs_·_10_knowledge_·_6_principles_·_4_checklists_·_5_examples_·_3_refs-blueviolet.svg)]()
 
 </div>
 
@@ -83,7 +83,7 @@ The skill applies a **six-step reasoning model** when a security lens changes th
 > When a system can reach inconsistent state, the resolution mechanism determines the security impact. Last-writer-wins silently discards authorized changes. Manual reconciliation leaves inconsistency indefinitely. Automatic merge may produce unintended state. The skill evaluates the resolution, not just the inconsistency.
 
 ## Repository Structure
-
+ 
 ```
 security-engineer-skill/
 ├── README.md              ← You are here
@@ -96,14 +96,17 @@ security-engineer-skill/
 │   ├── SPEC-002           ← Architecture and directory responsibilities
 │   ├── SPEC-003           ← Behavioral principles and communication norms
 │   ├── SPEC-004           ← Content organization rules
-│   └── SPEC-005           ← Agent reasoning model (the core)
+│   ├── SPEC-005           ← Agent reasoning model (the core)
+│   └── SPEC-006           ← Skill extension protocol & precedence rules
 │
-├── principles/            ← How the skill thinks
-├── knowledge/             ← What the skill knows
-├── checklists/            ← What the skill checks
+├── principles/            ← How the skill thinks (foundational axioms)
+├── knowledge/             ← What the skill knows (technology-agnostic concepts)
+├── checklists/            ← What the skill checks (general software verification)
 ├── patterns/              ← Concrete security patterns (emerging, validated, established)
-├── examples/              ← How the skill applies
-└── references/            ← Where the skill points
+├── examples/              ← How the skill applies (worked walkthroughs)
+├── references/            ← Where the skill points (external standards)
+└── docs/                  ← Architecture proposals and refactor history
+    └── architecture/
 ```
 
 ## What's Inside
@@ -118,6 +121,7 @@ security-engineer-skill/
 | [SPEC-003](specs/SPEC-003-skill-behavior.md) | Behavioral principles and communication norms |
 | [SPEC-004](specs/SPEC-004-content-organization.md) | How content should be written and organized |
 | [SPEC-005](specs/SPEC-005-agent-operational-behavior.md) | How the agent processes, reasons, and decides |
+| [SPEC-006](specs/SPEC-006-skill-extension-protocol.md) | Extension protocol, precedence rules, and domain contracts |
 
 </details>
 
@@ -150,8 +154,6 @@ security-engineer-skill/
 | [Supply Chain Security](knowledge/supply-chain-security.md) | Every dependency is a trust decision — most are made implicitly. |
 | [Threat Modeling](knowledge/threat-modeling.md) | Identify risks before they become incidents, not after. |
 | [Error Handling and Secure Failure](knowledge/error-handling-secure-failure.md) | When something goes wrong, the system should become more restrictive, not less. |
-| [Prompt Injection](knowledge/prompt-injection.md) | When data and instructions share the same channel, data can become instructions. |
-| [Agent Trust Model](knowledge/agent-trust-model.md) | Operator, user, and environment are three different trust levels — collapsing them is the root cause of most agentic failures. |
 
 </details>
 
@@ -164,7 +166,6 @@ security-engineer-skill/
 | [Security Code Review](checklists/security-code-review.md) | Review code changes for security concerns |
 | [Secrets Management Review](checklists/secrets-management-review.md) | Review how a system handles credentials and secrets |
 | [Threat Modeling Review](checklists/threat-modeling-review.md) | Conduct a structured threat model |
-| [Agentic System Review](checklists/agentic-system-review.md) | Review an AI agent or multi-agent system before deployment |
 
 </details>
 
@@ -189,7 +190,6 @@ security-engineer-skill/
 | [OWASP and Vulnerability Standards](references/owasp-and-vulnerability-standards.md) | OWASP Top 10, CWE Top 25, ASVS, Cheat Sheet Series — with direct mappings to this skill's knowledge files |
 | [Threat Modeling Frameworks](references/threat-modeling-frameworks.md) | STRIDE, PASTA, LINDDUN, Attack Trees, MITRE ATT&CK, NIST SP 800-30 — when and how to apply each |
 | [Cloud and Infrastructure Security](references/cloud-and-infrastructure-security.md) | AWS Well-Architected, CIS Benchmarks, CSA CCM, NIST SP 800-190 for containers, MITRE ATT&CK for Cloud |
-| [OWASP LLM Top 10](references/owasp-llm-top10.md) | The 10 most critical risks for LLM applications and agentic systems — mapped to this skill's knowledge files and checklists |
 
 </details>
 
@@ -202,10 +202,32 @@ security-engineer-skill/
 | [Concurrent Payment Review](examples/concurrent-payment-review.md) | Temporal trust boundaries, state evolution modeling, execution model classification, defensive control sufficiency, temporal qualification, `[REQUIRES_EXTERNAL_EVIDENCE]` |
 | [TalkTalk Breach Case Study](examples/talktalk-case-study.md) | Real-world incident analysis: structurally guaranteed findings, confirmed by absence of control, defense in depth, legacy system risks |
 | [IAC and Cloud Misconfiguration Review](examples/iac-cloud-misconfiguration-review.md) | Cloud-native attack surfaces: IAM wildcard policies, public S3 buckets, hardcoded credentials in CI/CD, blast radius amplification |
-| [Prompt Injection Review](examples/prompt-injection-review.md) | Agentic systems: indirect injection via web retrieval, trust level collapse, capability chaining, blast radius as severity metric |
 | [Web App Container Audit](examples/web-app-container-audit.md) | TOCTOU in password reset, Docker network trust boundaries, XSS in server-rendered HTML, control sufficiency in rate limiting |
 
 </details>
+
+## Core Architecture & Specialized Extensions
+
+Trust Boundary operates as the **Stable / Technology-Agnostic Security Reasoning Core**. Following [SPEC-006 (Skill Extension Protocol)](specs/SPEC-006-skill-extension-protocol.md), specialized domain auditor skills build on top of its reasoning engine without duplicating or weakening its foundational axioms:
+
+```text
+       Trust Boundary Core (security-engineer-skill)
+         [Stable / Technology-Agnostic Reasoning Core]
+                            │
+                            ▼
+          Extension Protocol (SPEC-006)
+         [Precedence, Compatibility & Contracts]
+                            │
+                            ▼
+      Specialized Auditors (e.g., agentic-security-auditor)
+         [Domain-Specific Specializations & Evidence Collectors]
+```
+
+- **Precedence Rule:** An extension may specialize and expand the Core, but **cannot contradict** its axioms, evidence model, execution model, trust-boundary model, or control-sufficiency model.
+- **Core Independence:** Trust Boundary Core has zero operational dependency on extensions. It functions autonomously for general software engineering audits.
+- **Available Extensions:**
+  - **[Agentic Security Auditor](../agentic-security-auditor/)**: Specialization for AI agents, multi-agent frameworks, MCP (Model Context Protocol), tool calling security, RAG/memory poisoning, the 3-Layer Sufficiency Rubric (Prompt/Arch/API), MAESTRO 7-layer taxonomy, and passive evidence collectors (`audit_docker.py`, `audit_network.py`, `audit_secrets.py`).
+
 
 ## Platform Compatibility
 

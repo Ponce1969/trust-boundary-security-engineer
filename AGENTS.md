@@ -57,16 +57,17 @@ security-engineer-skill/
 ├── LICENSE            # License terms
 ├── AGENTS.md          # Agent behavior rules (this file)
 ├── SKILL.md           # Skill definition and triggers
-├── specs/             # Specification documents (SPEC-001 through SPEC-005)
+├── specs/             # Specification documents (SPEC-001 through SPEC-006)
 ├── principles/        # Security engineering principles
 ├── knowledge/         # Domain knowledge entries
 ├── checklists/        # Actionable security checklists
+├── patterns/          # Architectural & state evolution patterns
 ├── examples/          # Worked walkthroughs
-└── references/        # External references and further reading
-    ├── owasp-and-vulnerability-standards.md
-    ├── owasp-llm-top10.md
-    ├── threat-modeling-frameworks.md
-    └── cloud-and-infrastructure-security.md
+├── references/        # External references and further reading
+│   ├── cloud-and-infrastructure-security.md
+│   ├── owasp-and-vulnerability-standards.md
+│   └── threat-modeling-frameworks.md
+└── docs/              # Architectural proposals and evolution docs
 ```
 
 ## Contribution Guidelines

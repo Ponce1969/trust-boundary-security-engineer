@@ -23,7 +23,8 @@ security-engineer-skill/
 │   ├── SPEC-002-architecture.md
 │   ├── SPEC-003-skill-behavior.md
 │   ├── SPEC-004-content-organization.md
-│   └── SPEC-005-agent-operational-behavior.md
+│   ├── SPEC-005-agent-operational-behavior.md
+│   └── SPEC-006-skill-extension-protocol.md
 ├── principles/
 │   ├── context-matters.md
 │   ├── control-sufficiency.md
@@ -32,12 +33,10 @@ security-engineer-skill/
 │   ├── human-in-the-loop.md
 │   └── minimal-change.md
 ├── knowledge/
-│   ├── agent-trust-model.md
 │   ├── defense-in-depth.md
 │   ├── error-handling-secure-failure.md
 │   ├── input-validation.md
 │   ├── least-privilege.md
-│   ├── prompt-injection.md
 │   ├── secrets-management.md
 │   ├── secure-by-default.md
 │   ├── secure-serialization.md
@@ -45,22 +44,29 @@ security-engineer-skill/
 │   ├── threat-modeling.md
 │   └── trust-boundaries.md
 ├── checklists/
-│   ├── agentic-system-review.md
 │   ├── repository-entry-scan.md
 │   ├── secrets-management-review.md
 │   ├── security-code-review.md
 │   └── threat-modeling-review.md
+├── patterns/
+│   ├── PAT-001-mutable-singleton.md
+│   ├── PAT-002-lifetime-mismatch.md
+│   ├── PAT-003-background-task-lifetime-leak.md
+│   ├── PAT-004-secret-reuse.md
+│   └── PAT-005-insufficient-control.md
 ├── examples/
 │   ├── authentication-bypass-review.md
 │   ├── concurrent-payment-review.md
 │   ├── iac-cloud-misconfiguration-review.md
-│   ├── prompt-injection-review.md
-│   └── talktalk-case-study.md
-└── references/
-    ├── cloud-and-infrastructure-security.md
-    ├── owasp-and-vulnerability-standards.md
-    ├── owasp-llm-top10.md
-    └── threat-modeling-frameworks.md
+│   ├── talktalk-case-study.md
+│   └── web-app-container-audit.md
+├── references/
+│   ├── cloud-and-infrastructure-security.md
+│   ├── owasp-and-vulnerability-standards.md
+│   └── threat-modeling-frameworks.md
+└── docs/
+    └── architecture/
+        └── security-skills-refactor.md
 ```
 
 # Directory Responsibilities
@@ -127,7 +133,7 @@ Not all files carry the same weight. Changes to higher-tier files affect everyth
 | Tier | Files | Modification rule |
 |------|-------|-------------------|
 | **Tier 1** | `specs/SPEC-005-agent-operational-behavior.md` | **Never modify directly.** Document proposed changes as a comment in the relevant example file and flag for human review. |
-| **Tier 2** | `specs/SPEC-001` through `SPEC-004` | Requires human review. Changes to architecture, behavior, or content organization affect every file in the repository. |
+| **Tier 2** | `specs/SPEC-001` through `SPEC-004`, `SPEC-006` | Requires human review. Changes to architecture, behavior, content organization, or extension protocol affect every file or extension in the repository. |
 | **Tier 3** | `principles/*` | Requires human review. A principle change alters how the reasoning model interprets evidence. |
 | **Tier 4** | `knowledge/*`, `checklists/*` | Agent may add new files following the contribution protocol. Agent may modify existing files only to add references or fix factual errors. |
 | **Tier 5** | `examples/*`, `references/*` | Agent may add new files following the contribution protocol. Agent may extend existing files with new entries. |

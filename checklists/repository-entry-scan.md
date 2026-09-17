@@ -80,7 +80,7 @@ Based on Steps 1-3, select the appropriate checklist for the deeper review:
 | Code changes to review (functions, classes, endpoints) | `checklists/security-code-review.md` |
 | Credentials, tokens, API keys, secrets handling | `checklists/secrets-management-review.md` |
 | Architecture with multiple services or complex data flows | `checklists/threat-modeling-review.md` |
-| An AI agent with tools, memory, or multi-agent communication | `checklists/agentic-system-review.md` |
+| An AI agent with tools, memory, or multi-agent communication | See specialized extension `agentic-security-auditor` (`specs/SPEC-006-skill-extension-protocol.md`) |
 
 More than one checklist may apply. Start with the one that matches the highest-severity signals found in Step 2.
 

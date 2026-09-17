@@ -82,7 +82,7 @@ When uncertain, default to deep review if external input is involved or trust bo
 - Docker, containers, or microservice networking → `knowledge/trust-boundaries.md`, `knowledge/least-privilege.md`
 - Password reset, credential lifecycle, or token usage → `knowledge/secrets-management.md`, `principles/control-sufficiency.md`
 - Evaluating whether a control is adequate (not just present) → `principles/control-sufficiency.md`
-- Agentic system, LLM application, or multi-agent architecture → `knowledge/prompt-injection.md`, `knowledge/agent-trust-model.md`, `references/owasp-llm-top10.md`
+- Agentic systems, LLMs, MCP tools, or AI workflows → see specialized extension `agentic-security-auditor` (`specs/SPEC-006-skill-extension-protocol.md`)
 - Vulnerability classification or CWE mapping needed → `references/owasp-and-vulnerability-standards.md`
 - Threat modeling methodology selection → `references/threat-modeling-frameworks.md`
 
@@ -92,7 +92,6 @@ When uncertain, default to deep review if external input is involved or trust bo
 - Code review or code change analysis → `checklists/security-code-review.md`
 - Secrets, credentials, or tokens analysis → `checklists/secrets-management-review.md`
 - Threat modeling or architecture review → `checklists/threat-modeling-review.md`
-- Agentic system or LLM application review → `checklists/agentic-system-review.md`
 
 ### Examples Load for Reference When the Reasoning Model is Applied to a Similar Scenario
 
@@ -100,7 +99,6 @@ When uncertain, default to deep review if external input is involved or trust bo
 - Concurrent execution, shared state, or distributed systems → `examples/concurrent-payment-review.md`
 - Real-world breach analysis or documented incident → `examples/talktalk-case-study.md`
 - Cloud configuration, IAC, or CI/CD pipeline security → `examples/iac-cloud-misconfiguration-review.md`
-- Agentic system, prompt injection, or multi-agent trust → `examples/prompt-injection-review.md`
 - Docker containers, microservice networking, password reset tokens, or XSS in server-rendered HTML → `examples/web-app-container-audit.md`
 
 ### Principles Load When the Reasoning Model References Them
@@ -112,7 +110,6 @@ When uncertain, default to deep review if external input is involved or trust bo
 - Classifying a finding by vulnerability type → `references/owasp-and-vulnerability-standards.md`
 - Threat modeling methodology selection → `references/threat-modeling-frameworks.md`
 - Cloud, IAC, or container security standards → `references/cloud-and-infrastructure-security.md`
-- LLM application or agentic system risk classification → `references/owasp-llm-top10.md`
 
 ## Efficiency Rule
 
